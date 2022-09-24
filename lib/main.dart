@@ -1,179 +1,118 @@
 import 'package:flutter/material.dart';
+import 'soccernews.dart';
 
 void main() {
-  runApp(const Layout());
+  runApp(MyApp());
 }
 
-class Layout extends StatelessWidget {
-  const Layout({Key? key}) : super(key: key);
-
+class MyApp extends StatelessWidget {
+  final contents = [
+    "Pique Bilang Wasit Untungkan Madrid, Koeaman Tepok Jidat",
+    "Pique Bilang Wasit Untungkan Madrid, Koeaman Tepok Jidat",
+    "Pique Bilang Wasit Untungkan Madrid, Koeaman Tepok Jidat",
+    "Pique Bilang Wasit Untungkan Madrid, Koeaman Tepok Jidat",
+  ];
+  final images = [
+    "d.jpg",
+    "d.jpg",
+    "d.jpg",
+    "d.jpg",
+  ];
+  final dates = [
+    "Barcelona Feb 13, 2021",
+    "Barcelona Feb 13, 2021",
+    "Barcelona Feb 13, 2021",
+    "Barcelona Feb 13, 2021",
+  ];
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Soccer News',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      debugShowCheckedModeBanner: false,
       home: DefaultTabController(
-        length : 2,
+        length: 2,
         child: Scaffold(
           appBar: AppBar(
-            bottom: TabBar(
+            bottom: const TabBar(
+              padding: EdgeInsets.all(1.0),
               tabs: [
                 Tab(text: "BERITA TERBARU"),
-                Tab(text: "PERTANDINGAN HARI INI"),
+                Tab(
+                  text: "PERTANDINGAN HARI INI",
+                )
               ],
             ),
-            title: Text('MyApp'),
+            title: const Text('MyApp'),
           ),
           body: TabBarView(
             children: [
-              Layout1(key: this.key,),
-              Layout1(key: this.key,),
+              Column(
+                children: [
+                  const TopNews(),
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: contents.length,
+                      itemBuilder: (context, index) {
+                        return News(index);
+                      },
+                    ),
+                  ),
+                ],
+              ),
+              const Center(
+                child: Text("Halaman pertandingan"),
+              ),
             ],
           ),
-        )
+        ),
       ),
     );
   }
-}
 
-class Layout1 extends StatelessWidget {
-  const Layout1({Key? key}) : super(key: key);
-
-
-  @override
-  Widget build(BuildContext context) {
-    return Expanded(
-      child: SingleChildScrollView(
-        child: Container(
-
-          child: Column(
+  Container News(int index) {
+    return Container(
+      width: 50,
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(1),
+      color: Colors.blue,
+      child: Column(
+        children: [
+          Row(
             children: [
-              Container(
-                margin: EdgeInsets.all(6),
-                decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                      color: Colors.purple
-                    )
-                ),
-                child: Column(
-                  children: [
-                    Container(
-                      child:Image(image: AssetImage("images/diego.jpg"),),
-                    ),
-                    Container(
-                      alignment: Alignment.center,
-                      padding: EdgeInsets.all(8),
-                      child: Text("Costa Berlari", style: TextStyle(fontSize: 24),),
-                    ),
-                    Container(
-
-                      color: Colors.purpleAccent,
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.all(19),
-                      child: Text("Transfer",
-                        style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+              Image.asset(
+                'images/' + images[index].toString(),
+                fit: BoxFit.contain,
+                height: 110,
               ),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 1
-                    )
-                ),
-                margin: EdgeInsets.fromLTRB(3, 10, 3, 2),
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                          )
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                           height : 130,
-                           width: MediaQuery.of(context).size.width / 2,
-                            child: Image(
-                                image : AssetImage("images/d.jpg"),
-                                fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerRight,
-                            height: 130,
-                            padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            width: (MediaQuery.of(context).size.width / 2) - 12,
-                            child:
-                            Text("Pique Bilang Wasit Untungkan Madrid, Koeaman Tepok Jidat"),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.all(10),
-                      child: Text("Barcelona Feb 13, 2021"),
-                    )
-                  ],
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(
-                        width: 1
-                    )
-                ),
-                margin: EdgeInsets.fromLTRB(3, 10, 3, 2),
-                child: Column(
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                          )
-                      ),
-                      child: Row(
-                        children: [
-                          Container(
-                            height : 130,
-                            width: MediaQuery.of(context).size.width / 2,
-                            child: Image(
-                              image : AssetImage("images/d.jpg"),
-                              fit: BoxFit.fitWidth,
-                            ),
-                          ),
-                          Container(
-                            alignment: Alignment.centerRight,
-                            height: 130,
-                            padding: EdgeInsets.fromLTRB(20, 0, 0, 0),
-                            width: (MediaQuery.of(context).size.width / 2) - 12,
-                            child:
-                            Text("Pique Bilang Wasit Untungkan Madrid, Koeaman Tepok Jidat"),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      alignment: Alignment.centerLeft,
-                      padding: EdgeInsets.all(10),
-                      child: Text("Barcelona Feb 13, 2021"),
-                    )
-                  ],
+              Expanded(
+                child: Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  margin: const EdgeInsets.all(1),
+                  color: Colors.white,
+                  height: 110,
+                  width: 210,
+                  alignment: Alignment.centerLeft,
+                  child: Text(contents[index]),
                 ),
               )
             ],
           ),
-        ),
-      )
+          Container(
+            padding: const EdgeInsets.all(10),
+            width: double.infinity,
+            color: Colors.white,
+            child: Text(
+              dates[index],
+              style: const TextStyle(
+                fontSize: 15,
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
-
-
-
-
-
